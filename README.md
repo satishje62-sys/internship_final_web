@@ -4,19 +4,17 @@ Ek simple, readable aur modern sports tournament management website jisme clean 
 
 ---
 
-## 📁 File Structure (Simple & Clean)
+## 📁 File Structure (Super Simple - Option 1)
 
 ```text
 tournament/
 ├── index.html        # Simple, readable HTML layout
-├── style.css         # Modern, clean CSS styles
-├── script.js         # Easy-to-understand tournament logic
-├── css/
-│   └── style.css     # CSS stylesheet
-├── js/
-│   └── app.js        # JavaScript application logic
+├── style.css         # Modern, clean CSS styles (Single CSS file)
+├── script.js         # Easy-to-understand tournament logic (Single JS file)
 └── README.md         # Documentation
 ```
+
+Koi duplicate file ya extra folder nahi hai! Sirf 3 main files me poora project chalta hai.
 
 ---
 
