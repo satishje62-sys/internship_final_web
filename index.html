@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🏆 Premier Tournament 2026 - Dashboard</title>
+  
+  <!-- Modern Font: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Simple, Clean CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ======================================================== -->
+  <!-- 1. HEADER SECTION (Tournament Name & Action Buttons)     -->
+  <!-- ======================================================== -->
+  <header class="header">
+    <div class="container header-content">
+      <div class="brand">
+        <span class="brand-icon">🏆</span>
+        <div>
+          <h1 class="brand-title">Premier Tournament 2026</h1>
+          <p class="brand-subtitle">Simple, Live & Interactive Sports Dashboard</p>
+        </div>
+      </div>
+      
+      <!-- Top Quick Actions -->
+      <div class="header-actions">
+        <button id="simulateBtn" class="btn btn-primary" title="Simulate the next unplayed match">
+          🎲 Simulate Next Match
+        </button>
+        <button id="addMatchBtn" class="btn btn-secondary" title="Schedule a new match fixture">
+          ➕ Add Fixture
+        </button>
+        <button id="resetBtn" class="btn btn-outline" title="Reset all data back to original defaults">
+          🔄 Reset
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container main-content">
+
+    <!-- ======================================================== -->
+    <!-- 2. QUICK STATS SUMMARY BAR                               -->
+    <!-- ======================================================== -->
+    <section class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">👥</div>
+        <div class="stat-info">
+          <span class="stat-label">Total Teams</span>
+          <strong class="stat-value" id="statTeams">6</strong>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon">⚽</div>
+        <div class="stat-info">
+          <span class="stat-label">Matches Played</span>
+          <strong class="stat-value" id="statPlayed">0 / 0</strong>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon">🎯</div>
+        <div class="stat-info">
+          <span class="stat-label">Total Goals</span>
+          <strong class="stat-value" id="statGoals">0</strong>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon">👑</div>
+        <div class="stat-info">
+          <span class="stat-label">Current Leader</span>
+          <strong class="stat-value" id="statLeader">-</strong>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ======================================================== -->
+    <!-- 3. NAVIGATION TABS (Switch between Sections)             -->
+    <!-- ======================================================== -->
+    <nav class="nav-tabs">
+      <button class="tab-btn active" data-target="standings-section">📊 Points Table</button>
+      <button class="tab-btn" data-target="fixtures-section">⚔️ Matches & Fixtures</button>
+      <button class="tab-btn" data-target="teams-section">🛡️ Teams</button>
+    </nav>
+
+
+    <!-- ======================================================== -->
+    <!-- 4. POINTS TABLE SECTION (Standings)                      -->
+    <!-- ======================================================== -->
+    <section id="standings-section" class="tab-content active">
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h2 class="section-title">📊 Tournament Standings</h2>
+            <p class="section-desc">Points automatically update as matches are played or edited.</p>
+          </div>
+          <div class="badge-legend">
+            <span class="badge-dot badge-cl"></span> Top 2: Qualifiers
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table" id="standingsTable">
+            <thead>
+              <tr>
+                <th style="width: 60px;">#</th>
+                <th>Team</th>
+                <th title="Matches Played">P</th>
+                <th title="Won">W</th>
+                <th title="Drawn">D</th>
+                <th title="Lost">L</th>
+                <th title="Goals For">GF</th>
+                <th title="Goals Against">GA</th>
+                <th title="Goal Difference">GD</th>
+                <th title="Total Points" class="highlight-col">PTS</th>
+              </tr>
+            </thead>
+            <tbody id="standingsBody">
+              <!-- Dynamically populated by JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ======================================================== -->
+    <!-- 5. MATCH FIXTURES & RESULTS SECTION                      -->
+    <!-- ======================================================== -->
+    <section id="fixtures-section" class="tab-content">
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h2 class="section-title">⚔️ Fixtures & Match Results</h2>
+            <p class="section-desc">Click "Edit Score" on any match to update the result.</p>
+          </div>
+          
+          <!-- Filter Buttons: All, Finished, Upcoming -->
+          <div class="filter-group">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="finished">Finished</button>
+            <button class="filter-btn" data-filter="upcoming">Upcoming</button>
+          </div>
+        </div>
+
+        <!-- Match Cards List -->
+        <div class="matches-grid" id="matchesList">
+          <!-- Dynamically populated by JavaScript -->
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ======================================================== -->
+    <!-- 6. TEAMS SHOWCASE SECTION                                -->
+    <!-- ======================================================== -->
+    <section id="teams-section" class="tab-content">
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h2 class="section-title">🛡️ Participating Clubs</h2>
+            <p class="section-desc">Overview of all competing clubs in the championship.</p>
+          </div>
+        </div>
+
+        <!-- Teams Cards Grid -->
+        <div class="teams-grid" id="teamsList">
+          <!-- Dynamically populated by JavaScript -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ======================================================== -->
+  <!-- 7. MODAL: EDIT MATCH SCORE                               -->
+  <!-- ======================================================== -->
+  <div class="modal-overlay" id="scoreModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="modalTitle">Edit Match Score</h3>
+        <button class="modal-close-btn" id="closeScoreModal">&times;</button>
+      </div>
+      <form id="scoreForm">
+        <input type="hidden" id="editMatchId">
+        
+        <div class="score-inputs">
+          <div class="team-input-group">
+            <label id="homeTeamLabel" class="form-label">Team 1</label>
+            <input type="number" id="homeScoreInput" class="form-input text-center" min="0" max="30" required>
+          </div>
+
+          <span class="vs-divider">VS</span>
+
+          <div class="team-input-group">
+            <label id="awayTeamLabel" class="form-label">Team 2</label>
+            <input type="number" id="awayScoreInput" class="form-input text-center" min="0" max="30" required>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" id="cancelScoreModal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Score</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- ======================================================== -->
+  <!-- 8. MODAL: ADD NEW FIXTURE                                -->
+  <!-- ======================================================== -->
+  <div class="modal-overlay" id="newMatchModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>➕ Add New Fixture</h3>
+        <button class="modal-close-btn" id="closeNewMatchModal">&times;</button>
+      </div>
+      <form id="newMatchForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Home Team</label>
+            <select id="newHomeTeamSelect" class="form-input" required>
+              <!-- Options populated by JS -->
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Away Team</label>
+            <select id="newAwayTeamSelect" class="form-input" required>
+              <!-- Options populated by JS -->
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Match Date / Round</label>
+          <input type="text" id="newMatchDate" class="form-input" placeholder="e.g. Round 4, 25 Sep" required>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" id="cancelNewMatchModal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Schedule Match</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- ======================================================== -->
+  <!-- 9. SIMPLE FOOTER                                         -->
+  <!-- ======================================================== -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <p>🏆 Premier Tournament Dashboard &copy; 2026. Built with clean, readable HTML, CSS & JavaScript.</p>
+    </div>
+  </footer>
+
+  <!-- Simple, Clean JavaScript -->
+  <script src="js/app.js"></script>
+</body>
+</html>
